@@ -27,6 +27,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//路由规划
+// /: 首页
+// /u/[user]:用户的主页
+// /post: 发表信息
+// /reg: 用户注册
+// /login: 用户登陆
+// /logout: 用户
 app.get('/', routes.index);
 app.get('/hello', routes.hello);
 app.get('/users', user.list);
