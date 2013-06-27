@@ -8,5 +8,10 @@ exports.index = function(req, res){
 };
 
 exports.hello = function(req, res) {
-  res.send('The time is ' + new Date().toString());
+  var nowTime = 'The time is ' + new Date().toString();
+  res.render('hello', {
+    title: 'hello world',
+    time: nowTime,
+    layout: 'layout'
+});
 };
