@@ -35,9 +35,13 @@ if ('development' == app.get('env')) {
 // /login: 用户登陆
 // /logout: 用户
 app.get('/', routes.index);
-app.get('/hello', routes.hello);
-app.get('/users', user.list);
-app.get('/user/:username', user.name);
+app.get('/u/:user', routes.user);
+app.post('/post', routes.post);
+app.get('/reg', routes.reg);
+app.post('/reg', routes.doReg);
+app.get('login', routes.login);
+app.post('login', routes.doLogin);
+app.get('logout', routes.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
