@@ -6,9 +6,11 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , crypto = require('crypto')
   , http = require('http')
   , path = require('path')
   , MongoStore = require('connect-mongo')(express)
+  , flash = require('connect-flash')
   , settings = require('./settings');
 
 var app = express();
@@ -17,6 +19,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(flash());
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
