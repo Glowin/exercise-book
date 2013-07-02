@@ -40,13 +40,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-routes(app);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-
-app.dynamicHelpers({
+/*app.dynamicHelpers({
   user: function(req, res) {
     return req.session.user
   },
@@ -64,4 +58,10 @@ app.dynamicHelpers({
     else
       return null
   },
-})
+})*/
+
+routes(app);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
