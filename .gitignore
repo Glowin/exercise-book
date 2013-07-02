@@ -1,1 +1,15 @@
 *~
+.DS_Store
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.swp
+*.swo
+.coverage_data
+.idea
+
+node/express/microblog/node_modules/
