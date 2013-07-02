@@ -31,14 +31,6 @@ app.use(express.session({
     db: settings.db
   })
 }));
-//app.use(express.router(routes));
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
 
 /*app.dynamicHelpers({
   user: function(req, res) {
@@ -59,6 +51,24 @@ if ('development' == app.get('env')) {
       return null
   },
 })*/
+
+app.use(function(req, res, next){
+  var error = req.flash('error');
+  var success = req.flash('success');
+  res.locals.user = req.session.user;
+  res.locals.error = error.length ? error : null; 
+  res.locals.success = success.length ? success : null;
+  next();
+});
+//app.use(express.router(routes));
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
 
 routes(app);
 
