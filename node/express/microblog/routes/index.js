@@ -1,6 +1,6 @@
 var flash = require('connect-flash')
-  , crypto = require('crypto');
-  User = require('../models/user.js');
+  , crypto = require('crypto')
+  ,User = require('../models/user.js');
 
 //路由规划
 // /: 首页
@@ -14,6 +14,39 @@ app.get('/', function(req, res) {
   res.render('index', {
     title: '首页',
   });
+});
+
+app.get('/login', function(req, res) {
+  res.render('login', {
+    title: '用户登入',
+  });
+});
+
+app.post('/login', function(req, res) {
+  //生成口令的散列值
+  var md5 = crypto.createHash('md5');
+  var password = md5.update(req.body.password).digest('base64');
+
+  User.get(req.body.username, function(err, user) {
+    if (!user) {
+      req.flash('error', '用户不存在');
+      return res.redirect('/login');
+    }
+    if (user.password != password) {
+      // console.log('password is ' + user.password + 'true password is ' + password);
+      req.flash('error', '用户口令错误');
+      return res.redirect('/login');
+    }
+    req.session.user = user;
+    req.flash('success', '登入成功');
+    res.redirect('/');
+    });
+});
+
+app.get('/logout', function(req, res) {
+  req.session.user = null;
+  req.flash('success', '登出成功');
+  res.redirect('/');
 });
 
 app.get('/reg', function(req, res) {
@@ -31,10 +64,11 @@ app.post('/reg', function(req, res) {
     //生成口令的散列值
     var md5 = crypto.createHash('md5')
     var password = md5.update(req.body.password).digest('base64')
+    console.log('password is ' + req.body['password'] + 'true password is' + password);
 
     var newUser = new User({
       name: req.body.username,
-      password: req.body.password,
+      password: password,
     })
 
     //Check the username exist or not
