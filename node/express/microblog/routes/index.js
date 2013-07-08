@@ -12,8 +12,16 @@ var flash = require('connect-flash')
 // /logout: 用户
 module.exports = function(app) {
 app.get('/', function(req, res) {
-  res.render('index', {
-    title: '首页',
+  throw new Error('A error accours');
+  Post.get(null, function(err, posts) {
+    if (err) {
+      posts = [];
+    }
+
+    res.render('index', {
+      title: '首页',
+      posts: posts,
+    });
   });
 });
 
@@ -132,7 +140,7 @@ app.get('/u/:user', function(req, res) {
   });
 });
 
-};//module.exports
+}; //module.exports
 
 function checkLogin(req, res, next) {
   if (!req.session.user) {

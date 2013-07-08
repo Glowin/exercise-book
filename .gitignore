@@ -13,3 +13,4 @@ lib-cov
 .idea
 
 node/express/microblog/node_modules/
+node/express/microblog/log/*
