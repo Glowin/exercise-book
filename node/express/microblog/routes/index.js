@@ -12,7 +12,7 @@ var flash = require('connect-flash')
 // /logout: 用户
 module.exports = function(app) {
 app.get('/', function(req, res) {
-  throw new Error('A error accours');
+  throw new Error('An error for test purposes.');
   Post.get(null, function(err, posts) {
     if (err) {
       posts = [];

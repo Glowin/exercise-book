@@ -66,23 +66,26 @@ app.use(function(req, res, next){
   res.locals.success = success.length ? success : null;
   next();
 });
-//app.use(express.router(routes));
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.set("env" , 'production');
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+//app.set("env" , 'production');
 
 app.configure('production', function(){
   app.use(function (err, req, res, next) {
     var meta = '[' + new Date() + '] ' + req.url + '\n';
     errorLogfile.write(meta + err.stack + '\n');
+    next();
   });
 });
+
+//app.use(express.router(routes));
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
 
 routes(app);
 
