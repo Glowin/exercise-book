@@ -16,7 +16,7 @@ LABEL_DESC_CODE32:	Descriptor		0,SegCode32Len - 1,	DA_C + DA_32;非一致代码�
 LABEL_DESC_VIDEO:	Descriptor	0B8000h,0ffffh, DA_DRW;显存首地址
 ;GDT 结束
 
-GdtLen	equ	$-LANBEL_GDT;	GDT长度
+GdtLen	equ	$-LABEL_GDT;	GDT长度
 GdtPtr	dw	GdtLen - 1;
 	dd	0;
 
@@ -48,7 +48,7 @@ LABEL_BEGIN:
 	xor	eax, eax
 	mov	ax, ds
 	shl	eax, 4
-	add	eax, LABEL_GTD	; eax <- gdt 基地址
+	add	eax, LABEL_GDT	; eax <- gdt 基地址
 	mov	dword [GdtPtr + 2], eax; [GdtPtr + 2] <- gdt 基地址
 
 	;加载 GDTR
