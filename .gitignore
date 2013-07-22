@@ -14,3 +14,5 @@ lib-cov
 
 node/express/microblog/node_modules/
 node/express/microblog/log/*
+
+~.bin
