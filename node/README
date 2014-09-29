@@ -1,0 +1,6 @@
+This execise is about a codelab called [Let's Scaffold a Web App with Yeoman | Yeoman](http://yeoman.io/codelab.html)
+
+## install yeoman
+
+`npm install -g yo`
+
